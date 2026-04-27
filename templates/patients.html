@@ -31,7 +31,7 @@
                 <td>{{ patient.period_length }}</td>
                 <td>{{ patient.created_at }}</td>
                 <td>
-                    <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="btn btn-sm btn-outline-gray">Edit</a>
+                    <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="btn btn-sm btn-outline-dark">Edit</a>
                     <form method="POST" action="{{ url_for('delete_patient', patient_id=patient.id) }}" style="display:inline;margin-left:0.5rem;">
                         <button class="btn btn-sm btn-danger" type="submit">Delete</button>
                     </form>
