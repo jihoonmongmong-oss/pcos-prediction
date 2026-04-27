@@ -3,27 +3,31 @@ from urllib.parse import unquote, urlparse
 
 
 def _get_database_config():
+    # Try standard database URLs first (Railway supports this)
     database_url = (
         os.getenv('DATABASE_URL')
+        or os.getenv('MYSQL_URL')
         or os.getenv('MYSQL_DATABASE_URL')
         or os.getenv('CLEARDB_DATABASE_URL')
     )
+
     if database_url:
         parsed = urlparse(database_url)
         return {
-            'host': parsed.hostname or '127.0.0.1',
+            'host': parsed.hostname,
             'port': parsed.port or 3306,
-            'user': parsed.username or 'root',
+            'user': parsed.username,
             'password': unquote(parsed.password) if parsed.password else '',
-            'database': parsed.path.lstrip('/') or 'pcos_prediction',
+            'database': parsed.path.lstrip('/'),
         }
 
+    # Fallback: Railway-specific environment variables
     return {
-        'host': os.getenv('DB_HOST', os.getenv('MYSQL_HOST', '127.0.0.1')),
-        'port': int(os.getenv('DB_PORT', os.getenv('MYSQL_PORT', 3306))),
-        'user': os.getenv('DB_USER', os.getenv('MYSQL_USER', 'root')),
-        'password': os.getenv('DB_PASSWORD', os.getenv('MYSQL_PASSWORD', '')),
-        'database': os.getenv('DB_NAME', os.getenv('MYSQL_DATABASE', 'pcos_prediction')),
+        'host': os.getenv('MYSQLHOST', '127.0.0.1'),
+        'port': int(os.getenv('MYSQLPORT', 3306)),
+        'user': os.getenv('MYSQLUSER', 'root'),
+        'password': os.getenv('MYSQLPASSWORD', ''),
+        'database': os.getenv('MYSQLDATABASE', 'pcos_prediction'),
     }
 
 
