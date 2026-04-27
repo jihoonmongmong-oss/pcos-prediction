@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-header">{{ action }} Patient Record</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row g-3">
+                <div class="col-md-4"><label class="form-label">Age</label><input class="form-control" type="number" name="age" value="{{ patient.age or '' }}" required></div>
+                <div class="col-md-4"><label class="form-label">Weight (kg)</label><input class="form-control" type="number" step="0.1" name="weight" value="{{ patient.weight or '' }}" required></div>
+                <div class="col-md-4"><label class="form-label">Height (cm)</label><input class="form-control" type="number" step="0.1" name="height" value="{{ patient.height or '' }}" required></div>
+                <div class="col-md-6"><label class="form-label">Blood Group</label><select class="form-select" name="blood_group" required>{% for group in blood_groups %}<option value="{{ group[0] }}" {% if patient.get('blood_group') == group[0] %}selected{% endif %}>{{ group[1] }}</option>{% endfor %}</select></div>
+                <div class="col-md-6"><label class="form-label">Menstrual interval (months)</label><input class="form-control" type="number" name="menstrual_interval" value="{{ patient.get('menstrual_interval', '') }}" required></div>
+                <div class="col-md-6"><label class="form-label">Period length (days)</label><input class="form-control" type="number" name="period_length" value="{{ patient.get('period_length', '') }}" required></div>
+                {% for field, label in [('weight_gain','Weight gain recently?'), ('hair_growth','Excess hair growth?'), ('skin_darkening','Skin darkening?'), ('hair_loss','Hair loss?'), ('acne','Acne?'), ('fast_food','Fast food regularly?'), ('exercise','Exercise regularly?'), ('mood_swings','Mood swings?'), ('periods_regular','Periods regular?')] %}
+                <div class="col-md-4">
+                    <label class="form-label">{{ label }}</label>
+                    <select class="form-select" name="{{ field }}">
+                        <option value="1" {% if patient.get(field) == 1 %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if patient.get(field) == 0 %}selected{% endif %}>No</option>
+                    </select>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="btn btn-maroon mt-4">{{ action }} Record</button>
+            <a href="{{ url_for('patients') }}" class="btn btn-secondary mt-4">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

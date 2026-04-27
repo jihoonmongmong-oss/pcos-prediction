@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Patient Records</h2>
+    <a class="btn btn-maroon" href="{{ url_for('add_patient') }}">Add New Patient</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Age</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Blood Group</th>
+                <th>Period Interval</th>
+                <th>Period Length</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.age }}</td>
+                <td>{{ patient.weight }}</td>
+                <td>{{ patient.height }}</td>
+                <td>{{ blood_group_labels[patient.blood_group] }}</td>
+                <td>{{ patient.menstrual_interval }}</td>
+                <td>{{ patient.period_length }}</td>
+                <td>{{ patient.created_at }}</td>
+                <td>
+                    <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_patient', patient_id=patient.id) }}" style="display:inline;margin-left:0.5rem;">
+                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

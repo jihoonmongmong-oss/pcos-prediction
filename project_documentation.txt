@@ -1,0 +1,44 @@
+1. Introduction
+
+This system is a Flask-based web application for PCOS risk prediction. It combines a user-friendly web interface, a MySQL database backend, and a trained machine learning model to collect patient information, store records, and generate a PCOS diagnosis prediction.
+
+2. Problem Statement
+
+The application addresses the need for a simple yet functional health prediction system that supports data collection, record management, and automated risk assessment. By using symptoms, biometric data, and menstrual history, the system helps demonstrate how intelligent web applications can support decision-making in a healthcare context.
+
+3. System Features
+
+- A responsive Flask web interface for data entry and prediction requests.
+- A prediction form where users can submit patient details such as age, weight, height, blood group, menstrual cycle characteristics, and related symptoms.
+- CRUD operations for patient records: create, read, update, and delete entries.
+- Prediction history tracking with saved results and probabilities.
+- A dashboard summary displaying total patients, total predictions, and prediction distribution.
+- Integration of a trained machine learning model for binary PCOS risk classification.
+
+4. Database Design
+
+The MySQL database uses two related tables:
+- `patients`: stores patient demographics and symptom data.
+- `predictions`: stores prediction results linked to patient records using a foreign key (`patient_id`).
+
+The database design supports data persistence, history tracking, and relational integrity. The provided SQL import file creates the database and tables for XAMPP/MySQL.
+
+5. Machine Learning Model
+
+The ML component is a logistic regression model trained with scikit-learn on the provided PCOS dataset. The model uses features such as age, weight, height, blood group, menstrual interval, period length, and binary symptom indicators. The training process includes scaling the input features and saving the final trained pipeline to `model.pkl`.
+
+6. Flask + MySQL Integration
+
+The Flask app connects to MySQL using `mysql-connector-python`. The application includes a database module that initializes the database schema and provides connection handling. The web routes interact with the database for record insertion, updates, deletions, and queries to display dashboard statistics and history.
+
+7. Deployment
+
+The project is designed to run in a local development environment with XAMPP for MySQL and Python for Flask. The `config.py` file contains database connection settings that can be adjusted for host, user, password, and database name. The application can be started with `python app.py` after importing the SQL schema and installing required packages.
+
+8. Results
+
+The system successfully trains the model and generates predictions with an accuracy of approximately 92% on the test split. Users can submit new patient data and receive a PCOS risk classification along with the model probability. Prediction results are saved to the database and displayed in the history and dashboard views.
+
+9. Conclusion
+
+This PCOS prediction system demonstrates integration between backend processing, database management, web interface rendering, and machine learning prediction. It provides a complete example of how Flask, MySQL, and scikit-learn can work together in a functional intelligent web application, fulfilling the requirements for data storage, CRUD operations, model integration, and user interaction.

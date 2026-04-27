@@ -1,0 +1,40 @@
+body {
+    background: #f8f8f8;
+    color: #333;
+}
+
+.navbar, .footer, .card-header {
+    background: #800000;
+    color: #fff;
+}
+
+.btn-maroon {
+    background: #800000;
+    color: #fff;
+    border: none;
+}
+
+.btn-maroon:hover {
+    background: #5c0000;
+    color: #fff;
+}
+
+.table thead {
+    background: #800000;
+    color: #fff;
+}
+
+.card {
+    border: 1px solid #ddd;
+}
+
+.form-check-label {
+    margin-left: 0.25rem;
+}
+
+footer {
+    padding: 1rem 0;
+    background: #800000;
+    color: #fff;
+    text-align: center;
+}
