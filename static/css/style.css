@@ -1,6 +1,7 @@
 body {
     background: #f8f8f8;
     color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar, .footer, .card-header {
@@ -26,6 +27,7 @@ body {
 
 .card {
     border: 1px solid #ddd;
+    margin-bottom: 1.5rem;
 }
 
 .form-check-label {
@@ -37,4 +39,59 @@ footer {
     background: #800000;
     color: #fff;
     text-align: center;
+    margin-top: 2rem;
+}
+
+/* Responsive Design - Mobile First */
+@media (max-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .table {
+        font-size: 12px;
+    }
+    
+    .navbar-brand {
+        font-size: 18px;
+    }
+}
+
+/* Tablet Devices */
+@media (min-width: 577px) and (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .row.g-3 > [class*="col-"] {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+}
+
+/* Large Screens */
+@media (min-width: 769px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .card {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
 }
