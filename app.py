@@ -13,7 +13,10 @@ BLOOD_GROUPS = [
     (13, 'B+'),
     (14, 'B-'),
     (15, 'AB+'),
-    (16, 'AB-')
+    (16, 'AB-'),
+    (17, 'O'),
+    (18, 'O+'),
+    (19, 'O-'0)
 ]
 BLOOD_GROUP_LABELS = {key: label for key, label in BLOOD_GROUPS}
 
