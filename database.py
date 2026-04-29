@@ -35,7 +35,7 @@ def init_db():
                 age INT NOT NULL,
                 weight FLOAT NOT NULL,
                 height FLOAT NOT NULL,
-                blood_group VARCHAR(16) NOT NULL,
+                blood_group INT NOT NULL,
                 menstrual_interval INT NOT NULL,
                 weight_gain TINYINT(1) NOT NULL,
                 hair_growth TINYINT(1) NOT NULL,
