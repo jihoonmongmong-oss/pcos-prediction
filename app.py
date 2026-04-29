@@ -97,6 +97,13 @@ def index():
     total_patients = cursor.fetchone()['total_patients']
     cursor.execute('SELECT COUNT(*) AS total_predictions FROM predictions')
     total_predictions = cursor.fetchone()['total_predictions']
+    cursor.execute(
+        'SELECT COALESCE(SUM(prediction = 0), 0) AS negative_count, '
+        'COALESCE(SUM(prediction = 1), 0) AS positive_count FROM predictions'
+    )
+    prediction_summary = cursor.fetchone()
+    negative_count = prediction_summary['negative_count']
+    positive_count = prediction_summary['positive_count']
     cursor.execute('SELECT prediction, COUNT(*) AS count FROM predictions GROUP BY prediction')
     prediction_counts = cursor.fetchall()
     cursor.execute('SELECT p.*, pr.prediction, pr.probability, pr.created_at FROM patients p JOIN predictions pr ON p.id = pr.patient_id ORDER BY pr.created_at DESC LIMIT 5')
@@ -109,6 +116,8 @@ def index():
         blood_groups=BLOOD_GROUPS,
         total_patients=total_patients,
         total_predictions=total_predictions,
+        negative_count=negative_count,
+        positive_count=positive_count,
         prediction_counts=prediction_counts,
         recent_history=recent_history
     )
