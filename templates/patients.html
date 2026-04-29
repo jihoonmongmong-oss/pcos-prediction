@@ -26,6 +26,7 @@
                 <td>{{ patient.age }}</td>
                 <td>{{ patient.weight }}</td>
                 <td>{{ patient.height }}</td>
+                <td>{{ patient.blood_group }} ({{ blood_group_labels.get(patient.blood_group|int, 'Not Found') }})</td>
                 <td>{{ blood_group_labels[patient.blood_group] }}</td>
                 <td>{{ patient.menstrual_interval }}</td>
                 <td>{{ patient.period_length }}</td>
