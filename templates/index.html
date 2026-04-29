@@ -37,7 +37,7 @@
                         <tbody>
                             {% for row in recent_history %}
                             <tr>
-                                <td>{{ row.patient_id }}</td>
+                                <td>{{ row.id }}</td>
                                 <td>{{ 'Positive' if row.prediction == 1 else 'Negative' }}</td>
                                 <td>{{ '{:.2f}'.format(row.probability) }}</td>
                                 <td>{{ row.created_at }}</td>
