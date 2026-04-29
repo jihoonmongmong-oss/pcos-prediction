@@ -137,7 +137,7 @@ def patients():
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
-    return render_template('patients.html', patients=rows)
+    return render_template('patients.html', patients=rows, blood_group_labels=BLOOD_GROUP_LABELS)
 
 
 @app.route('/patients/add', methods=['GET', 'POST'])
@@ -213,7 +213,7 @@ def history():
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
-    return render_template('history.html', history=rows)
+    return render_template('history.html', history=rows, blood_group_labels=BLOOD_GROUP_LABELS)
 
 
 if __name__ == '__main__':
