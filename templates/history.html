@@ -18,7 +18,6 @@
             <tr>
                 <td>{{ record.id }}</td>
                 <td>{{ record.age }}</td>
-                <td>{{ record.blood_group }} ({{ blood_group_labels.get(record.blood_group|int, 'Not Found') }})</td>
                 <td>{{ blood_group_labels[record.blood_group] }}</td>
                 <td>{{ 'Positive' if record.prediction == 1 else 'Negative' }}</td>
                 <td>{{ '{:.2f}'.format(record.probability) }}</td>
