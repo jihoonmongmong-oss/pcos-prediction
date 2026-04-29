@@ -91,19 +91,19 @@ def ensure_database_initialized():
 
 @app.route('/')
 def index():
-    conn = get_connection()
+       conn = get_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute('SELECT COUNT(*) AS total_patients FROM patients')
     total_patients = cursor.fetchone()['total_patients']
     cursor.execute('SELECT COUNT(*) AS total_predictions FROM predictions')
     total_predictions = cursor.fetchone()['total_predictions']
     cursor.execute(
-        'SELECT COALESCE(SUM(prediction = 0), 0) AS negative_count, '
-        'COALESCE(SUM(prediction = 1), 0) AS positive_count FROM predictions'
+        'SELECT COALESCE(SUM(CASE WHEN prediction = 0 THEN 1 ELSE 0 END), 0) AS negative_count, '
+        'COALESCE(SUM(CASE WHEN prediction = 1 THEN 1 ELSE 0 END), 0) AS positive_count FROM predictions'
     )
     prediction_summary = cursor.fetchone()
     negative_count = prediction_summary['negative_count']
-    positive_count = prediction_summary['positive_count']
+    spositive_count = prediction_summary['positive_count']
     cursor.execute('SELECT prediction, COUNT(*) AS count FROM predictions GROUP BY prediction')
     prediction_counts = cursor.fetchall()
     cursor.execute('SELECT p.*, pr.prediction, pr.probability, pr.created_at FROM patients p JOIN predictions pr ON p.id = pr.patient_id ORDER BY pr.created_at DESC LIMIT 5')
@@ -121,7 +121,6 @@ def index():
         prediction_counts=prediction_counts,
         recent_history=recent_history
     )
-
 
 @app.route('/predict', methods=['POST'])
 def predict_route():
