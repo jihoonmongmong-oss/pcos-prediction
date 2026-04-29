@@ -60,6 +60,8 @@ def init_db():
                 FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
             )
         """)
+        # Alter blood_group to INT if it's still VARCHAR from old schema
+        cursor.execute("ALTER TABLE patients MODIFY COLUMN blood_group INT NOT NULL")
         conn.commit()
     except Error as err:
         print('Database initialization error:', err)
